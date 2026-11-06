@@ -41,28 +41,29 @@
 - `hotfix/*` は `main` にマージしたあと、同じ修正を `develop` にもマージする（忘れると次に `develop` を `main` にマージしたときにバグが戻る）
 - フロントとバックの両方を変える機能は、同じブランチで作ってよい（API の入出力を先に合意しておく）
 - 作業が長引くときは、こまめに `develop` の変更を取り込み、マージ時の衝突を小さくする
-### ブランチ名の付け方
-- `種類/内容` の形にする
-- 内容は英小文字とハイフンで書く（日本語・空白・アンダースコアは使わない）
-- 内容の最初に、コミットの scope と同じ機能名を付けると分かりやすい（例：`notes-` `camera-` `admin-`）
-- 短く、何をするブランチか分かる名前にする
+### ブランチ台帳（`.github/BRANCHES.md`）
+似た名前のブランチや、同じ作業の重複を防ぐため、**作業用ブランチは台帳に載っている作業IDと名前だけを使う**。
+ 
+- ブランチ名は `種類/作業ID-名前` の形にする
+- `feature/*` は、台帳の「ブランチ名」をそのままコピーして使う（自分で名前を付けない）
+- `fix/*`・`hotfix/*`・`clean/*` は、対象の作業IDを頭に付ける
+- `docs/*` は、台帳の「ドキュメントのブランチ」の名前を使う
+- 1つの作業ID = 1人の担当 = 1つの feature ブランチ
+- 台帳にない作業が必要になったら、PMが作業IDを採番し、台帳に行を追加してからブランチを作る
+- 英小文字・数字・ハイフンだけを使う（日本語・空白・アンダースコア・大文字は使わない）
   
 ### ブランチ名の例
-- `feature/auth-login-form`
-- `feature/notes-list`
-- `feature/camera-capture`
-- `feature/ai-review-edit`
-- `feature/social-follow`
-- `feature/moderation-report-account`
-- `feature/admin-reports`
-- `fix/notes-list-sort-order`
-- `fix/camera-rotate-mask-position`
-- `hotfix/uploads-size-check`
-- `clean/social-like-repository`
-- `clean/remove-groups`
+- `feature/note-02-mynote-list`
+- `feature/ai-03-review-edit`
+- `feature/mod-02-report-account`
+- `fix/note-02-sort-order`
+- `fix/img-02-rotate-mask-position`
+- `hotfix/img-03-size-check`
+- `clean/rct-01-like-repository`
+- `clean/base-remove-groups`
 - `docs/db-design`
 - `docs/contributing`
-- 
+  
 ## 3. コミットルール
 コミットメッセージは以下の形式を基本とします。
  
