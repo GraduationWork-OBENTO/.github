@@ -41,7 +41,7 @@
 - `hotfix/*` は `main` にマージしたあと、同じ修正を `develop` にもマージする（忘れると次に `develop` を `main` にマージしたときにバグが戻る）
 - フロントとバックの両方を変える機能は、同じブランチで作ってよい（API の入出力を先に合意しておく）
 - 作業が長引くときは、こまめに `develop` の変更を取り込み、マージ時の衝突を小さくする
-### ブランチ台帳（`.github/BRANCHES.md`）
+### ブランチ台帳　[.github/BRANCHES.md](https://github.com/GraduationWork-OBENTO/.github/blob/main/BRANCHES.md)
 似た名前のブランチや、同じ作業の重複を防ぐため、**作業用ブランチは台帳に載っている作業IDと名前だけを使う**。
  
 - ブランチ名は `種類/作業ID-名前` の形にする
