@@ -14,27 +14,55 @@
 ## 2. ブランチ運用
 このプロジェクトでは、以下のブランチを使用します。
  
+### 常にあるブランチ
+ 
 | ブランチ名 | 役割 | 派生元 | マージ先 |
 |---|---|---|---|
 | `main` | 安定版・完成版を置くブランチ（展示会・AWS環境で動かす版） | - | - |
 | `develop` | 開発中の内容をまとめるブランチ | `main` | `main` |
-| `feature/*` | 機能ごとの開発を行うブランチ | `develop` | `develop` |
+ 
+### 作業用のブランチ（作業が終わったら削除する）
+ 
+| ブランチ名 | 使うとき | 派生元 | マージ先 | 主なコミットの type |
+|---|---|---|---|---|
+| `feature/*` | 機能の追加・改善・仕様変更 | `develop` | `develop` | `add` `update` `change` |
+| `fix/*` | `develop` で見つかったバグの修正 | `develop` | `develop` | `fix` |
+| `hotfix/*` | `main`（AWS環境・展示会の版）で見つかった、すぐ直す必要があるバグの修正 | `main` | `main` と `develop` の両方 | `fix` |
+| `clean/*` | 動きを変えない整理・リファクタリング、不要なものの削除 | `develop` | `develop` | `clean` `remove` |
+| `docs/*` | ドキュメントだけの変更（README、設計書、このファイル） | `develop` | `develop` | `docs` |
+ 
+どれに当てはまるか迷ったら `feature/*` を使う。
  
 ### 運用ルール
-- `main` には直接 push しない
-- 作業は基本的に `feature/*` ブランチで行う
-- 作業完了後は Pull Request で `develop` にマージする
+- `main` と `develop` には直接 push しない（必ず Pull Request を通す）
+- 1ブランチ1目的を原則とする（機能の追加とリファクタリングを同じブランチで行わない）
+- 作業完了後は Pull Request でマージ先にマージし、作業用のブランチは削除する
 - ある程度まとまったら `develop` を `main` にマージする
-- 1ブランチ1目的を原則とする
+- `hotfix/*` は `main` にマージしたあと、同じ修正を `develop` にもマージする（忘れると次に `develop` を `main` にマージしたときにバグが戻る）
 - フロントとバックの両方を変える機能は、同じブランチで作ってよい（API の入出力を先に合意しておく）
-### feature ブランチ名の例
-- `feature/login-form`
+- 作業が長引くときは、こまめに `develop` の変更を取り込み、マージ時の衝突を小さくする
+### ブランチ名の付け方
+- `種類/内容` の形にする
+- 内容は英小文字とハイフンで書く（日本語・空白・アンダースコアは使わない）
+- 内容の最初に、コミットの scope と同じ機能名を付けると分かりやすい（例：`notes-` `camera-` `admin-`）
+- 短く、何をするブランチか分かる名前にする
+  
+### ブランチ名の例
+- `feature/auth-login-form`
 - `feature/notes-list`
 - `feature/camera-capture`
 - `feature/ai-review-edit`
-- `feature/note-like`
-- `feature/report-account`
+- `feature/social-follow`
+- `feature/moderation-report-account`
 - `feature/admin-reports`
+- `fix/notes-list-sort-order`
+- `fix/camera-rotate-mask-position`
+- `hotfix/uploads-size-check`
+- `clean/social-like-repository`
+- `clean/remove-groups`
+- `docs/db-design`
+- `docs/contributing`
+- 
 ## 3. コミットルール
 コミットメッセージは以下の形式を基本とします。
  
@@ -52,6 +80,7 @@
 - `clean`：整理・リファクタリング
 - `remove`：削除
 - `docs`：ドキュメント更新
+- 
 ### scope について
 - scope は変更対象を分かりやすくするために付与する
 - scope は必須ではない
@@ -60,6 +89,7 @@
 - 新しい scope を使う場合は、意味が分かる短い名前にする
 - 表記ゆれを避けるため、既存の scope があればそれを優先する
 - 機能の scope は、`features/` と `modules/` のフォルダ名に合わせる
+
 ### 使用する scope の例
  
 #### 機能（`features/` ・ `modules/` と同じ名前）
@@ -72,22 +102,27 @@
 - `social`：フィード・検索・いいね・ブックマーク・フォロー
 - `moderation`：通報・ブロック
 - `admin`：運営管理（Web版のみ）
+  
 #### 共通（Flutter）
 - `theme`：配色・文字・ボタンなど共通デザイン（`app/theme.dart`）
 - `router`：画面遷移（`app/router.dart`）
 - `core`：通信・共通エラー処理・共通部品（`core/`）
+  
 #### バックエンド
 - `api`：API全体に関わる変更
 - `db`：テーブル定義・マイグレーション（Alembic）
 - `storage`：画像の保存先（ローカル・S3）
 - `bedrock`：AI連携（Bedrock・仮実装）
+
 #### インフラ
 - `docker`：`compose.yaml` ・ `compose.prod.yaml` ・ Dockerfile
 - `caddy`：Web配信・API転送の設定
 - `aws`：AWSの構築・デプロイ手順
+
 #### ドキュメント・設定
 - `docs`：ドキュメント
 - `config`：設定ファイル・環境変数の見本（`.env.example`）・依存関係
+
 ### コミット例（scopeなし）
 - `add: ノート一覧の空状態を追加`
 - `fix: 画像アップロード時の容量チェックを修正`
@@ -96,6 +131,7 @@
 - `clean: NoteRepository の処理を整理`
 - `remove: グループ機能のフォルダを削除`
 - `docs: CONTRIBUTING.md を更新`
+
 ### コミット例（scopeあり）
 - `add(notes): マイノート一覧を追加`
 - `fix(camera): 回転後に伏字の位置がずれる問題を修正`
@@ -105,21 +141,25 @@
 - `remove(db): 使わなくなったテーブルを削除`
 - `add(db): follows テーブルのマイグレーションを追加`
 - `docs(docs): DB設計を更新`
+
 ### コミット時のルール
 - 1コミット1内容を意識する
 - 無関係な変更を1つのコミットに含めない
 - 後から見て内容が分かるメッセージにする
 - 大きすぎる変更は分けてコミットする
 - フロントとバックを両方変えた場合は、できるだけコミットを分ける
+
 ## 4. プッシュルール
 - 区切りの良い単位で push する
 - 明らかに壊れている状態では共有ブランチに push しない
 - Pull Request 作成前に不要なファイルや差分が含まれていないか確認する
+  
 ### push してはいけないもの
 - `.env`（見本の `.env.example` だけ入れる）
 - AWSの認証情報・本番のパスワード
 - ローカル保存の画像フォルダ・ビルド成果物
 - 実在する人の名前や個人情報が写ったノート画像（テスト用の画像はダミーを使う）
+  
 ## 5. 共通ファイル・DB・APIの変更ルール
 - 次の共通ファイルを変えるときは、Pull Request の Impact に書き、レビュー担当に知らせる
   - `frontend/lib/app/router.dart`、`frontend/pubspec.yaml`
@@ -132,6 +172,7 @@
   - マイグレーションを含む Pull Request をマージしたら、チームに知らせる（各自の MySQL で `alembic upgrade head` が必要になるため）
 - 通常の API で認証を省略しない。認証の差し替えは `backend/tests/` の中だけで行う
 - Bedrock の呼び出しには費用がかかるため、必要なときだけ呼び出す（呼び出し方の方針はチームで決めたものに従う）
+  
 ## 6. Pull Request ルール
 Pull Request では、以下の内容を記載する。
  
