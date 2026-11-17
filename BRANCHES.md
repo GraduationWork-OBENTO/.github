@@ -108,7 +108,7 @@
 |---|---|---|---|---|---|---|---|---|
 | prv-01 | `feature/prv-01-access-check` | 閲覧権限の判定・画像の安全な配信 | F-PRV-04, 05 | 全閲覧画面 | `backend/app/core`、`modules/notes` | db-01、cmn-01 | Must | |
 | note-01 | `feature/note-01-note-save` | ノート保存（科目・公開範囲・投稿情報） | F-NOTE-01, 08, F-PRV-01, F-SNS-01 | SC-08 | `features/notes`、`modules/notes` | img-03 | Must | |
-| note-02 | `feature/note-02-mynote-list` | マイノート一覧 | F-NOTE-03 | SC-09 | `features/notes`、`modules/notes` | note-01 | Must | |
+| note-02 | `feature/note-02-mynote-list` | いいね一覧 | F-NOTE-03 | SC-09 | `features/notes`、`modules/notes` | note-01 | Must | |
 | note-03 | `feature/note-03-note-detail` | ノート詳細表示 | F-NOTE-05 | SC-04 | `features/notes`、`modules/notes` | prv-01、note-01 | Must | |
 | note-04 | `feature/note-04-note-delete` | ノート削除 | F-NOTE-07 | SC-04、SC-09 | `features/notes`、`modules/notes` | note-03 | Must | |
 | prv-02 | `feature/prv-02-visibility-change` | 公開範囲の変更 | F-PRV-03 | SC-04、SC-09 | `features/notes`、`modules/notes` | note-03 | Must | |
