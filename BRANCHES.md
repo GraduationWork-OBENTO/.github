@@ -130,6 +130,7 @@
 | sns-04 | `feature/sns-04-post-edit` | 投稿の編集・取り下げ | F-SNS-06 | SC-04、SC-10 | `features/social`、`modules/social` | note-01 | Should | |
 | sns-05 | `feature/sns-05-user-posts` | 利用者ごとの投稿一覧 | F-SNS-07 | SC-10 | `features/social`、`modules/social` | acc-01 | Should | |
 | sns-06 | `feature/sns-06-others-note` | 他者ノートの閲覧 | F-SNS-05 | SC-04 | `features/notes` | note-03 | 対象外（第6版） | |
+| sns-07 | `feature/sns-07-home-web-layout` | ホームの PC／Web レイアウト（幅ブレーク・中央寄せ） | F-SNS-02 | SC-02 | 'features/home' | sns-01 | Must
 
 ### 通報・ブロック・運営管理（MOD・ADM）
 
