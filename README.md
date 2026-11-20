@@ -8,17 +8,28 @@
 
 ## 管理しているもの
 
-### 開発ルール
-
-- `CONTRIBUTING.md`
-
-ブランチ運用、コミットメッセージ、プッシュ、Pull Request 作成時のルールをまとめています。
-
 ### ブランチ台帳
 
 - `BRANCHES.md`
 
 使ってよい作業用ブランチの一覧です。作業ID・ブランチ名・作業名・機能ID・画面・前提・優先度・担当をまとめています。内容は基本設計書 第6版に合わせています。
+> [!IMPORTANT]
+> ### 開発を始める前に必ず確認
+>
+> お勉当では、ブランチ名を台帳で一元管理しています。
+>
+> - 新規featureブランチの独自命名は禁止
+> - ブランチ作成前にBRANCHES.mdを確認
+> - 未登録の作業はPMに相談
+> - main / developへの直接pushは禁止
+>
+> 📖 [ブランチ台帳・運用ルール](https://github.com/GraduationWork-OBENTO/.github/blob/main/BRANCHES.md)
+
+### 開発ルール
+
+- `CONTRIBUTING.md`
+
+ブランチ運用、コミットメッセージ、プッシュ、Pull Request 作成時のルールをまとめています。
 
 ### Pull Request テンプレート
 
