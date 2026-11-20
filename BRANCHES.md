@@ -60,12 +60,15 @@
 
 | 作業ID | ブランチ名 | 作業名 | 機能ID | 画面 | 主なフォルダ | 前提 | 優先度 | 担当 |
 |---|---|---|---|---|---|---|---|---|
-| cmn-01 | `feature/cmn-01-image-storage` | 画像の保存先（ローカル・S3） | F-CMN-01 | — | `backend/app/integrations/storage` | base-03 | Must | |
+| cmn-01 | `feature/cmn-01-image-storage` | 画像の保存先（ローカル・S3） | F-CMN-01 | — | 
+`backend/app/integrations/storage` | base-03 | Must | |
 | cmn-02 | `feature/cmn-02-ai-usage-limit` | AI利用回数の制限 | F-CMN-02 | — | `backend/app/modules/ai` | ai-01 | Must | |
 | cmn-03 | `feature/cmn-03-notification` | お知らせ・通知 | F-CMN-03 | ヘッダー、SC-07、SC-12 | 未定 | — | 対象外（第6版） | |
 | cmn-04 | `feature/cmn-04-view-log` | 閲覧記録 | F-CMN-04 | — | 未定 | — | 対象外（第6版） | |
 | cmn-05 | `feature/cmn-05-idempotency` | 二重送信の防止（Idempotency-Key） | F-CMN-05 | SC-05〜08、SC-13 | `backend/app/core`、`frontend/lib/core` | base-02、base-03 | Must | |
 | cmn-06 | `feature/cmn-06-cleanup-jobs` | 後片付けの定期処理（24時間たった作成中ノートの削除・画像削除の再試行・止まったAI処理の復旧） | F-CMN-06 | — | `backend/app/jobs` | cmn-01、ai-01 | Must | |
+| cmn-02 | `feature/cmn-01-image-storage2` | 画像の保存先（ローカル・S3）のAPI開発 | F-CMN-01 | — | 
+`backend/app/integrations/storage` | base-03 | Must | |
 
 ### 認証・アカウント（AUTH・ACC）
 
